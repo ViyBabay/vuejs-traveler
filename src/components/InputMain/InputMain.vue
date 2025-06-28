@@ -1,7 +1,6 @@
 <script setup>
-import { ref } from 'vue'
-
 const props = defineProps({
+  modelValue: String,
   label: String,
   placeholder: String,
   type: {
@@ -14,11 +13,7 @@ defineOptions({
   inheritAttrs: false,
 })
 
-const inputText = ref('')
-
-const changeInput = (event) => {
-  inputText.value = event.target.value
-}
+const emits = defineEmits(['update:modelValue'])
 </script>
 <template>
   <div class="w-full text-dark">
@@ -30,7 +25,8 @@ const changeInput = (event) => {
           ...$props,
           ...$attrs,
         }"
-        @input="changeInput"
+        :value="modelValue"
+        @input="emits('update:modelValue', e.target.value)"
       />
     </label>
   </div>

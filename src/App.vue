@@ -1,4 +1,5 @@
 <script setup>
+import LoginForm from './components/Auth/LoginForm/LoginForm.vue'
 import RegistrationForm from './components/Auth/RegistrationForm/RegistrationForm.vue'
 
 // import HomeView from '../src/views/HomepageView/HomepageView.vue'
@@ -7,6 +8,7 @@ import RegistrationForm from './components/Auth/RegistrationForm/RegistrationFor
 
 <template>
   <RegistrationForm />
-  <!-- <FavoritePlaces /> -->
+  <LoginForm />
+
   <!-- <HomeView /> -->
 </template>
