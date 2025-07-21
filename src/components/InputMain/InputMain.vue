@@ -26,7 +26,7 @@ const emits = defineEmits(['update:modelValue'])
           ...$attrs,
         }"
         :value="modelValue"
-        @input="emits('update:modelValue', e.target.value)"
+        @input="emits('update:modelValue', $event.target.value)"
       />
     </label>
   </div>
