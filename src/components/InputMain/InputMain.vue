@@ -1,4 +1,6 @@
 <script setup>
+import { computed } from 'vue'
+
 const props = defineProps({
   modelValue: String,
   label: String,
@@ -13,14 +15,23 @@ defineOptions({
   inheritAttrs: false,
 })
 
+const baseStyles =
+  'w-full text-sm rounded-[4px] py-2 px-3 border-[#2c2c2c1a] border-[1px] focus:outline-primary'
+const isTextarea = computed(() => props.type === 'textarea')
+const inputStyles = computed(() => {
+  return isTextarea.value ? `${baseStyles} resize-none` : baseStyles
+})
+const componentType = computed(() => (isTextarea.value ? 'textarea' : 'input'))
+
 const emits = defineEmits(['update:modelValue'])
 </script>
 <template>
   <div class="w-full text-dark">
     <label for="input" class="block">
       <span class="block text-xs px-3 mb-2">{{ props.label }}</span>
-      <input
-        class="w-full text-sm rounded-[4px] py-2 px-3 border-[#2c2c2c1a] border-[1px] focus:outline-primary"
+      <component
+        :is="componentType"
+        :class="inputStyles"
         v-bind="{
           ...$props,
           ...$attrs,

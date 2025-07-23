@@ -5,3 +5,15 @@
   --color-gray: #939393;
   --color-dark: #2c2c2c;
 }
+
+safelist:
+  [ 'min-w-[350px]',
+  'bg-[rgba(0,0,0,0.3)]',
+  'rounded-2xl',
+  'p-10',
+  'w-full',
+  'h-full',
+  'fixed',
+  'top-0',
+  'left-0',
+  'overflow-auto'];
