@@ -15,7 +15,7 @@ const bgStyles =
 
 <template>
   <button
-    class="rounded-[12px] px-10 py-[12px] text-white font-bold tracking-tighter hover:scale-103 duration-500 cursor-pointer"
+    class="rounded-[12px] px-10 py-[12px] text-white font-bold tracking-tight hover:scale-103 duration-500 cursor-pointer"
     :class="bgStyles"
   >
     <slot></slot>

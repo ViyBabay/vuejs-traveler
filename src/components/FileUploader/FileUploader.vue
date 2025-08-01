@@ -21,14 +21,16 @@ const handleUpload = (event) => {
 </script>
 
 <template>
-  <label class="cursor-pointer hover:text-primary">
-    <input type="file" accept="image/*" class="hidden" @change="handleUpload" />
-    <span class="flex gap-2 items-center">
-      <svg class="w-4 h-4">
-        <use href="../../assets/img/sprite.svg#attachment"></use>
-      </svg>
-      <span class="underline text-xs">Натисність тут, щоб додати фото</span>
-    </span>
-  </label>
-  <div v-if="errorMessage" class="text-red-500 text-xs mt-2">{{ errorMessage }}</div>
+  <div>
+    <label class="cursor-pointer hover:text-primary">
+      <input type="file" accept="image/*" class="hidden" @change="handleUpload" />
+      <span class="flex gap-2 items-center">
+        <svg class="w-4 h-4">
+          <use href="../../assets/img/sprite.svg#attachment"></use>
+        </svg>
+        <span class="underline text-xs"><slot></slot></span>
+      </span>
+    </label>
+    <div v-if="errorMessage" class="text-red-500 text-xs mt-2">{{ errorMessage }}</div>
+  </div>
 </template>

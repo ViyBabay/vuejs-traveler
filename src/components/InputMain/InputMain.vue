@@ -16,7 +16,7 @@ defineOptions({
 })
 
 const baseStyles =
-  'w-full text-sm rounded-[4px] py-2 px-3 border-[#2c2c2c1a] border-[1px] focus:outline-primary'
+  'w-full text-sm rounded-[4px] py-2 px-3 outline outline-[#2c2c2c1a] focus:outline-primary'
 const isTextarea = computed(() => props.type === 'textarea')
 const inputStyles = computed(() => {
   return isTextarea.value ? `${baseStyles} resize-none` : baseStyles

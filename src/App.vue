@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import LoginForm from './components/Auth/LoginForm/LoginForm.vue'
 import RegistrationForm from './components/Auth/RegistrationForm/RegistrationForm.vue'
-import ModalMain from './components/ModalMain/ModalMain.vue'
+import NewPlaceModal from './components/NewPlaceModal/NewPlaceModal.vue'
 
 // import HomeView from '../src/views/HomepageView/HomepageView.vue'
 // import FavoritePlaces from './components/FavoritePlaces/FavoritePlaces.vue'
@@ -20,5 +20,9 @@ const openModal = () => {
   <button @click="openModal">модалка клац</button>
   <RegistrationForm @submit="console.log('Registration submitted')" />
   <LoginForm @submit="console.log('Login submitted')" />
-  <ModalMain v-if="isOpen" @close="closeModal">Це модалка</ModalMain>
+  <NewPlaceModal
+    :is-open="isOpen"
+    @close="closeModal"
+    @submit="console.log('New place submitted', $event)"
+  />
 </template>
