@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive } from 'vue'
 import ButtonMain from '../ButtonMain/ButtonMain.vue'
 import FileUploader from '../FileUploader/FileUploader.vue'
 import InputMain from '../InputMain/InputMain.vue'
@@ -13,7 +13,6 @@ const props = defineProps({
 })
 const emit = defineEmits(['close', 'submit'])
 
-const imageUrl = ref('')
 const formData = reactive({
   location: '',
   description: '',
@@ -26,11 +25,17 @@ const handleUpload = (url) => {
 const uploadedText = computed(() => {
   return formData.img ? 'Натисніть тут,  щоб змінити фото' : 'Натисніть тут,  щоб додати фото'
 })
+
+const resetForm = () => {
+  formData.location = ''
+  formData.description = ''
+  formData.img = ''
+}
 </script>
 
 <template>
   <ModalMain v-if="props.isOpen" @close="emit('close')">
-    <form @submit.prevent="emit('submit', formData)" class="min-w-[420px]">
+    <form @submit.prevent="emit('submit', formData, resetForm)" class="min-w-[420px]">
       <div class="flex flex-row items-center justify-center gap-2 mb-10">
         <img src="../../assets/img/map-pin-small.svg" />
         <h2 class="font-bold text-center">Додати маркер</h2>
