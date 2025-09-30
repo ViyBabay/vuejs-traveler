@@ -2,6 +2,13 @@
 import { MapboxMap, MapboxMarker } from '@studiometa/vue-mapbox-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { mapboxSettings } from '@/config/mapbox.js'
+
+defineProps({
+  places: {
+    type: Array,
+    default: () => [],
+  },
+})
 </script>
 
 <template>
@@ -12,6 +19,8 @@ import { mapboxSettings } from '@/config/mapbox.js'
     :center="mapboxSettings.center"
     :zoom="mapboxSettings.zoom"
   >
-    <MapboxMarker />
+    <MapboxMarker v-for="place in places" :key="place.id" :lng-lat="place.lngLat">
+      <img src="/src/assets/img/map-pin-small.svg" alt="Map Pin" />
+    </MapboxMarker>
   </MapboxMap>
 </template>
