@@ -7,7 +7,16 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  activeId: {
+    default: null,
+    type: Number,
+  },
 })
+
+const emit = defineEmits(['set-active-id'])
+const handlePlaceClick = (id) => {
+  emit('set-active-id', id)
+}
 </script>
 
 <template>
@@ -19,6 +28,8 @@ const props = defineProps({
       :title="place.title"
       :description="place.description"
       :img="place.img"
+      :is-active="place.id === props.activeId"
+      @click="handlePlaceClick(place.id)"
     />
     <ButtonMain class="mt-10 w-full"> Додати маркер</ButtonMain>
   </div>

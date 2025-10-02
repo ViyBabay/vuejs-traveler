@@ -1,22 +1,8 @@
 <script setup>
-// import { ref } from 'vue'
-// import LoginForm from './components/Auth/LoginForm/LoginForm.vue'
-// import RegistrationForm from './components/Auth/RegistrationForm/RegistrationForm.vue'
-// import NewPlaceModal from './components/NewPlaceModal/NewPlaceModal.vue'
-
+import { ref } from 'vue'
 import FavoritePlaces from './components/FavoritePlaces/FavoritePlaces.vue'
 import MapboxMap from './components/MapboxMap/MapboxMap.vue'
 
-// import HomeView from '../src/views/HomepageView/HomepageView.vue'
-// import FavoritePlaces from './components/FavoritePlaces/FavoritePlaces.vue'
-
-// const isOpen = ref(false)
-// const closeModal = () => {
-//   isOpen.value = false
-// }
-// const openModal = () => {
-//   isOpen.value = true
-// }
 const favoritePlaces = [
   {
     id: 1,
@@ -33,15 +19,21 @@ const favoritePlaces = [
     lngLat: [35.0552, 48.4227],
   },
 ]
+
+const activeId = ref(null)
+
+const setActiveId = (id) => {
+  activeId.value = id
+}
 </script>
 
 <template>
   <main class="flex h-screen">
     <div class="bg-white h-full w-[400px] overflow-auto pb-10">
-      <FavoritePlaces :items="favoritePlaces" />
+      <FavoritePlaces :items="favoritePlaces" :active-id="activeId" @set-active-id="setActiveId" />
     </div>
     <div class="w-full h-full">
-      <MapboxMap :places="favoritePlaces" />
+      <MapboxMap :places="favoritePlaces" :active-id="activeId" @marker-click="setActiveId" />
     </div>
   </main>
 </template>

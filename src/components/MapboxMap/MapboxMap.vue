@@ -9,18 +9,25 @@ defineProps({
     default: () => [],
   },
 })
+
+const emit = defineEmits(['marker-click'])
+const setActiveId = (id) => {
+  emit('marker-click', id)
+}
 </script>
 
 <template>
   <MapboxMap
     class="w-full h-full"
     :access-token="mapboxSettings.accessToken"
-    :style="mapboxSettings.style"
+    :mapStyle="mapboxSettings.style"
     :center="mapboxSettings.center"
     :zoom="mapboxSettings.zoom"
   >
     <MapboxMarker v-for="place in places" :key="place.id" :lng-lat="place.lngLat">
-      <img src="/src/assets/img/map-pin-small.svg" alt="Map Pin" />
+      <button @click="setActiveId(place.id)">
+        <img src="/src/assets/img/map-pin-small.svg" alt="Map Pin" />
+      </button>
     </MapboxMarker>
   </MapboxMap>
 </template>
