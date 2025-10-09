@@ -13,9 +13,10 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['set-active-id'])
+const emit = defineEmits(['set-active-id', 'place-click'])
 const handlePlaceClick = (id) => {
   emit('set-active-id', id)
+  emit('place-click', id)
 }
 </script>
 

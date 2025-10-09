@@ -21,19 +21,36 @@ const favoritePlaces = [
 ]
 
 const activeId = ref(null)
+const map = ref(null)
 
-const setActiveId = (id) => {
+const changeActiveId = (id) => {
   activeId.value = id
+}
+
+const changePlace = (id) => {
+  const { lngLat } = favoritePlaces.find((place) => place.id === id)
+  changeActiveId(id)
+  map.value.flyTo({ center: lngLat, zoom: 14 })
 }
 </script>
 
 <template>
   <main class="flex h-screen">
     <div class="bg-white h-full w-[400px] overflow-auto pb-10">
-      <FavoritePlaces :items="favoritePlaces" :active-id="activeId" @set-active-id="setActiveId" />
+      <FavoritePlaces
+        :items="favoritePlaces"
+        :active-id="activeId"
+        @set-active-id="changeActiveId"
+        @place-click="changePlace"
+      />
     </div>
     <div class="w-full h-full">
-      <MapboxMap :places="favoritePlaces" :active-id="activeId" @marker-click="setActiveId" />
+      <MapboxMap
+        :places="favoritePlaces"
+        :active-id="activeId"
+        @marker-click="changeActiveId"
+        @mb-created="(mapInstance) => (map = mapInstance)"
+      />
     </div>
   </main>
 </template>
