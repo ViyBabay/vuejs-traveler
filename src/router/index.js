@@ -1,12 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import GreetingView from '@/views/GreetingView.vue'
-import AuthView from '@/views/AuthView.vue'
-import HomepageView from '@/views/HomepageView.vue'
+
+const GreetingPage = () => import('@/views/GreetingView.vue')
+const AuthPage = () => import('@/views/AuthView.vue')
+const HomepagePage = () => import('@/views/HomepageView.vue')
 
 const routes = [
-  { path: '/', component: GreetingView },
-  { path: '/auth', component: AuthView },
-  { path: '/map', component: HomepageView },
+  { path: '/', component: GreetingPage },
+  { path: '/auth', component: AuthPage },
+  { path: '/map', component: HomepagePage },
 ]
 export const router = createRouter({
   history: createWebHistory(),
