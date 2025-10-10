@@ -2,7 +2,6 @@
 import ButtonMain from '@/components/ButtonMain/ButtonMain.vue'
 import InputMain from '@/components/InputMain/InputMain.vue'
 import { reactive } from 'vue'
-import FormContainer from '../FormContainer.vue'
 
 const emits = defineEmits(['submit'])
 const userData = reactive({
@@ -12,7 +11,7 @@ const userData = reactive({
 })
 </script>
 <template>
-  <FormContainer @submit.prevent="emits('submit', userData)">
+  <form @submit.prevent="emits('submit', userData)">
     <InputMain class="mb-4" label="Ім'я" placeholder="Іван Франко" v-model="userData.name" />
     <InputMain
       class="mb-4"
@@ -23,5 +22,5 @@ const userData = reactive({
     />
     <InputMain label="Пароль" type="password" v-model="userData.password" />
     <ButtonMain class="mt-10 w-full" variant="gradient" type="submit"> Створити акаунт </ButtonMain>
-  </FormContainer>
+  </form>
 </template>
