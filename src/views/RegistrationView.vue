@@ -2,23 +2,24 @@
 import RegistrationForm from '@/components/Auth/RegistrationForm/RegistrationForm.vue'
 import { register } from '@/api/user'
 import { useRouter } from 'vue-router'
-import { ref } from 'vue'
+import { useAuth } from '@/composables/useAuth'
 
 const router = useRouter()
-const isLoading = ref(false)
-
-const handleSubmit = async (formData) => {
-  isLoading.value = true
-  try {
-    await register(formData)
+const {
+  isLoading,
+  error,
+  auth: handleRegister,
+} = useAuth({
+  authFn: register,
+  onSuccess: () => {
     router.replace('/map')
-  } catch (error) {
-    console.error('Registration failed:', error)
-  } finally {
-    isLoading.value = false
-  }
-}
+  },
+  onError: () => {
+    console.error('Registration failed')
+  },
+})
 </script>
 <template>
-  <RegistrationForm @submit="handleSubmit" :is-loading="isLoading" />
+  <RegistrationForm @submit="handleRegister" :is-loading="isLoading" />
+  <div v-if="error" class="text-red-500">{{ error.message }}</div>
 </template>
