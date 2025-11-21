@@ -1,25 +1,10 @@
 <script setup>
+import { getFavoritePlaces } from '@/api/places'
 import FavoritePlaces from '@/components/FavoritePlaces/FavoritePlaces.vue'
 import MapboxMap from '@/components/MapboxMap/MapboxMap.vue'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
-const favoritePlaces = [
-  {
-    id: 1,
-    title: 'New place 1',
-    description: 'Place description',
-    img: '',
-    lngLat: [35.0452, 48.4887],
-  },
-  {
-    id: 2,
-    title: 'New place 2',
-    description: 'Place description',
-    img: '',
-    lngLat: [35.0552, 48.4227],
-  },
-]
-
+const favoritePlaces = ref([])
 const activeId = ref(null)
 const map = ref(null)
 
@@ -28,10 +13,21 @@ const changeActiveId = (id) => {
 }
 
 const changePlace = (id) => {
-  const { lngLat } = favoritePlaces.find((place) => place.id === id)
+  const { lngLat } = favoritePlaces.value.find((place) => place.id === id)
   changeActiveId(id)
   map.value.flyTo({ center: lngLat, zoom: 14 })
 }
+
+onMounted(async () => {
+  try {
+    const data = await getFavoritePlaces()
+
+    favoritePlaces.value = Array.isArray(data) ? data : data?.data || []
+  } catch (error) {
+    console.error('Failed to load places:', error)
+    favoritePlaces.value = []
+  }
+})
 </script>
 
 <template>

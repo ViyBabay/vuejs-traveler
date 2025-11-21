@@ -1,9 +1,9 @@
 <script setup>
 import LoginForm from '@/components/Auth/LoginForm/LoginForm.vue'
-import { login } from '@/api/user'
 
 import { useRouter } from 'vue-router'
 import { useAuth } from '@/composables/useAuth'
+import { authService } from '@/api/authService/authService'
 
 const router = useRouter()
 const {
@@ -11,7 +11,7 @@ const {
   error,
   auth: handleLogin,
 } = useAuth({
-  authFn: login,
+  authFn: (data) => authService.login(data),
   onSuccess: () => {
     router.replace('/map')
   },
