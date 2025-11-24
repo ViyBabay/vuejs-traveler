@@ -1,12 +1,15 @@
 <script setup>
 import { getFavoritePlaces } from '@/api/places'
 import FavoritePlaces from '@/components/FavoritePlaces/FavoritePlaces.vue'
+import NewPlaceModal from '@/components/NewPlaceModal/NewPlaceModal.vue'
 import MapboxMap from '@/components/MapboxMap/MapboxMap.vue'
 import { onMounted, ref } from 'vue'
+import { useModal } from '@/composables/useModal'
 
 const favoritePlaces = ref([])
 const activeId = ref(null)
 const map = ref(null)
+const { openModal, closeModal, isModalOpen } = useModal()
 
 const changeActiveId = (id) => {
   activeId.value = id
@@ -38,7 +41,9 @@ onMounted(async () => {
         :active-id="activeId"
         @set-active-id="changeActiveId"
         @place-click="changePlace"
+        @create-new-place="openModal"
       />
+      <NewPlaceModal :is-open="isModalOpen" @close="closeModal" />
     </div>
     <div class="w-full h-full">
       <MapboxMap

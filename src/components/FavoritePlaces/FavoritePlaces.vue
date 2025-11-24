@@ -13,7 +13,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['set-active-id', 'place-click'])
+const emit = defineEmits(['set-active-id', 'place-click', 'create-new-place'])
 const handlePlaceClick = (id) => {
   emit('set-active-id', id)
   emit('place-click', id)
@@ -35,6 +35,6 @@ const handlePlaceClick = (id) => {
         @click="handlePlaceClick(place.id)"
       />
     </slot>
-    <ButtonMain class="mt-10 w-full"> Додати маркер</ButtonMain>
+    <ButtonMain class="mt-10 w-full" @click="emit('create-new-place')"> Додати маркер</ButtonMain>
   </div>
 </template>
